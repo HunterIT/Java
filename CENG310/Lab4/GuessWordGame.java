@@ -82,7 +82,7 @@ public class GuessWordGame
 		int a = 0;
 		int attempts = 0;
 
-		while (!guessedWord.equals(hW))
+		while (!guessedWord.toString().equals(hW))
 		{   
 			boolean nothingFound = true;
 
