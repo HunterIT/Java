@@ -58,6 +58,7 @@ public class GuessWordGame
 
 	public static int guessWord(String hW, ArrayList<Integer> hint) throws Exception
 	{
+		/* Makes Strings full of *****, so it won't show the hidden word */
 		StringBuilder guessedWord = new StringBuilder();
 		for (int i = 0; i < hW.length(); i++)
 			guessedWord.append('*');
@@ -68,28 +69,27 @@ public class GuessWordGame
 
 		// Ouputs everything into ArrayList
 		while (hintFile.hasNext()) 
-		{
 			hintDef.add(hintFile.nextLine()); 
-		} 
 
 		hintFile.close(); //Close up the file, We don't need it anymore
 
 		int hintCount = hint.size();
-		int hintUsed = 1;
+		int hintUsed = 1;   //Starting Value of Used Hints
 
 		boolean loop = true;
 		boolean bounsAlive = true;
 
 		int a = 0;
+		int attempts = 0;
 
-		while (loop) 
-		{ 
+		while (!guessedWord.equals(hW))
+		{   
 			boolean nothingFound = true;
 
 			String input = JOptionPane.showInputDialog
-				("Guess the Letter of the NHL Team < " + guessedWord + ">");
-
-			char inputChar = input.charAt(0);
+			("Guess the Letter of the NHL Team < " + guessedWord + ">");
+			
+			char inputChar = input.charAt(0);  //Saves the first letter that was inputed !
 
 			/* Checks if the letter was already used and correct */ 
 			if (guessedWord.indexOf(inputChar + "") >= 0)
@@ -98,57 +98,52 @@ public class GuessWordGame
 				nothingFound = false;
 			} 
 
+			/* Checks all the letters to see if there is a match */
 			else
 		 		for (int i = 0; i < guessedWord.length(); i++)
 				{
 					if (inputChar == hW.charAt(i)) 
 					{
-						guessedWord.setCharAt(i,inputChar);
-						nothingFound = false;
-					}
+					guessedWord.setCharAt(i,inputChar);
+					nothingFound = false;
+					}		
 				}
 
-			if (nothingFound)
+			if (nothingFound)   //If no matching value was found
 			{
-				if (hintCount == hintUsed)
+				if (hintCount == hintUsed && bounsAlive)
 				{
-					JOptionPane.showMessageDialog(null, "SORRY: You've used all availble hints");
-
-					   if (bounsAlive)
-					   {
-						 	JOptionPane.showMessageDialog(null, "Bonus Hint: ");
-							bounsAlive = false;
-						}
+					JOptionPane.showMessageDialog(null, "Bonus Hint : "); 
+					bounsAlive = false;
 				}
 
-				else { 
-					String yn = JOptionPane.showInputDialog
+				else if (hintCount == hintUsed)
+						JOptionPane.showMessageDialog(null, "SORRY: You've used all availble hints"); 
+
+				else {
+
+                String yn = JOptionPane.showInputDialog
 							("Sorry: " + inputChar + " is not in the team's name.\n"
 							+ "Do you need a hint? You'll get in total " + hintCount
-							+ " hints\n" + "Enter 'y' or 'n' And it'll be your #" + hintUsed++); 
-					char yesno = yn.charAt(0); 
+							+ " hints\n" + "Enter 'y' or 'n' And it'll be your #" + hintUsed); 
 
+					char yesno = yn.charAt(0); 
+					int j = 0;
 					String hintMessage = "";
 
 						if (yesno == 'y' || yesno == 'Y') 
-						{
-							int j = 0;
+						{ 
+							/* Prints the Matching Hint */
 							for (int i = 0; i < hint.get(a); i++) 
 								hintMessage = hintDef.get(j++);
 							a++;
-							JOptionPane.showMessageDialog(null, hintMessage);
-
+							hintUsed++;
+							JOptionPane.showMessageDialog(null, hintMessage);  //Print Hint to User
 						}
-						
-						else if (yesno == 'n' || yesno == 'N')
-							JOptionPane.showMessageDialog(null, "Message will Not Appear Here");
+					}  
 
-						else 
-							JOptionPane.showMessageDialog(null, "Failed Input");
-					} 
-		}
-	
-		}
+		    }
+		} 
 	return 0;
 	}
 }
