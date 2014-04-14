@@ -1,3 +1,9 @@
+/**
+* Name: GuessingGame.java
+* @author Kenneth Hunter
+* @date April 14th, 2014
+* @revision: 1.0
+*********/
 import javax.swing.JFileChooser;
 import java.io.File;
 import java.util.Scanner;
@@ -25,8 +31,6 @@ public class GuessWordGame
 			/* Ranges the amount, for random selection mode */
 			int randomNum = 1 + (int)(Math.random()*wordCount);
 
-			System.out.println("Random Number = " + randomNum);
-
 			ArrayList<Integer> hints = new ArrayList<Integer>();
 
 			String output = " "; 
@@ -46,7 +50,6 @@ public class GuessWordGame
 				hints.add(i, filesc.nextInt());
 			}
 
-			System.out.println("Hidden Word = " + hiddenWord);
 			int attempts = guessWord(hiddenWord, hints); //GUESS THE WORDi
 
 			JOptionPane.showMessageDialog(null, "You've Got the Word!\nIt's "
@@ -57,6 +60,14 @@ public class GuessWordGame
 			System.out.println("No File Selected");
 
 	}
+
+	/** 
+	* This method is used to prompt the user for the guess the word, each time they get a letter
+	* It will appear with a new letter of that hidden word
+	*
+	* @param String hw, ArrayList<Interger> hint
+	* @return int attempts
+	*/
 
 	public static int guessWord(String hW, ArrayList<Integer> hint) throws Exception
 	{
