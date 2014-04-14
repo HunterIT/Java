@@ -110,27 +110,27 @@ public class GuessWordGame
 				}
 
 			if (nothingFound)   //If no matching value was found
-			{
+			{ 
 
-				if (hintCount <=  hintUsed)
+				String yn = JOptionPane.showInputDialog
+							("Sorry: " + inputChar + " is not in the team's name.\n"
+							+ "Do you need a hint? You'll get in total " + hintCount
+							+ " hints\n" + "Enter 'y' or 'n' And it'll be your #" + hintUsed); 
+
+
+				if (hintCount <  hintUsed)
 				{
 					JOptionPane.showMessageDialog(null, "SORRY: You've used all availble hints");
 
 					int getLength = guessedWord.length() - 1;  //Remove NULL Line
-					char firstChar = hW.charAt(0);
-					char lastChar = hW.charAt(getLength);
+					char firstChar = hW.charAt(0);             //Gets FirstChar
+					char lastChar = hW.charAt(getLength);      //Gets Last Char
 
 					JOptionPane.showMessageDialog(null, "A Bonus Hint: The name starts with '" +
 						firstChar + "' and ends with '" + lastChar + "'.");
 				}
 
-
 				else {
-
-                String yn = JOptionPane.showInputDialog
-							("Sorry: " + inputChar + " is not in the team's name.\n"
-							+ "Do you need a hint? You'll get in total " + hintCount
-							+ " hints\n" + "Enter 'y' or 'n' And it'll be your #" + hintUsed); 
 
 					char yesno = yn.charAt(0); 
 					int j = 0;
@@ -146,7 +146,6 @@ public class GuessWordGame
 							JOptionPane.showMessageDialog(null, hintMessage);  //Print Hint to User
 						}
 					}  
-
 		    }
 		} 
 	return 0;
