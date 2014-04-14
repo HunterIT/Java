@@ -47,8 +47,10 @@ public class GuessWordGame
 			}
 
 			System.out.println("Hidden Word = " + hiddenWord);
-			guessWord(hiddenWord, hints); //GUESS THE WORD
+			int attempts = guessWord(hiddenWord, hints); //GUESS THE WORDi
 
+			JOptionPane.showMessageDialog(null, "You've Got the Word!\nIt's "
+			         + hiddenWord + "\nYou missed " + attempts + " attempts.");
 	    } 
 
 	    else
@@ -111,6 +113,7 @@ public class GuessWordGame
 
 			if (nothingFound)   //If no matching value was found
 			{ 
+				attempts++; //Missed Attempt counter
 
 				String yn = JOptionPane.showInputDialog
 							("Sorry: " + inputChar + " is not in the team's name.\n"
@@ -125,6 +128,7 @@ public class GuessWordGame
 					int getLength = guessedWord.length() - 1;  //Remove NULL Line
 					char firstChar = hW.charAt(0);             //Gets FirstChar
 					char lastChar = hW.charAt(getLength);      //Gets Last Char
+					hintUsed++;
 
 					JOptionPane.showMessageDialog(null, "A Bonus Hint: The name starts with '" +
 						firstChar + "' and ends with '" + lastChar + "'.");
@@ -147,7 +151,9 @@ public class GuessWordGame
 						}
 					}  
 		    }
-		} 
-	return 0;
+		}
+
+	
+	return attempts;
 	}
 }
