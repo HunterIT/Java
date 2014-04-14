@@ -111,14 +111,19 @@ public class GuessWordGame
 
 			if (nothingFound)   //If no matching value was found
 			{
-				if (hintCount == hintUsed && bounsAlive)
+
+				if (hintCount <=  hintUsed)
 				{
-					JOptionPane.showMessageDialog(null, "Bonus Hint : "); 
-					bounsAlive = false;
+					JOptionPane.showMessageDialog(null, "SORRY: You've used all availble hints");
+
+					int getLength = guessedWord.length() - 1;  //Remove NULL Line
+					char firstChar = hW.charAt(0);
+					char lastChar = hW.charAt(getLength);
+
+					JOptionPane.showMessageDialog(null, "A Bonus Hint: The name starts with '" +
+						firstChar + "' and ends with '" + lastChar + "'.");
 				}
 
-				else if (hintCount == hintUsed)
-						JOptionPane.showMessageDialog(null, "SORRY: You've used all availble hints"); 
 
 				else {
 
