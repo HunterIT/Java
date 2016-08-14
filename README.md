@@ -13,4 +13,4 @@ For Example: If you forget how to get the square route of something, there will 
 CENG310
 ---------------------
 
-This folder contains all the labs I am currently working on in CENG310 at Humber College. The labs will be document what's going on and how to use it.
+This folder contains all the labs I completed in CENG310 at Humber College. 
